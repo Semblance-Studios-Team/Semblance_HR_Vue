@@ -1,0 +1,251 @@
+.tim-row {
+  margin-bottom: 20px;
+}
+.tim-white-buttons {
+  background-color: #777777;
+}
+.typography-line {
+  padding-left: 25%;
+  margin-bottom: 35px;
+  position: relative;
+  display: block;
+  width: 100%;
+}
+.typography-line span {
+  bottom: 10px;
+  color: #c0c1c2;
+  display: block;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 13px;
+  left: 0;
+  position: absolute;
+  width: 260px;
+  text-transform: none;
+}
+.tim-row {
+  padding-top: 60px;
+}
+.tim-row h3 {
+  margin-top: 0;
+}
+.offline-doc .page-header {
+  display: flex;
+  align-items: center;
+}
+.offline-doc .footer {
+  position: absolute;
+  width: 100%;
+  background: transparent;
+  bottom: 0;
+  color: #fff;
+  z-index: 1;
+}
+/************************ added css - Craig Burch 2019-2020 **************************************************************************/
+/*fixes template glitch with RTL */
+/*orginal default color = #FA0601 */
+body {
+direction: ltr !important;
+}
+li.nav-item p {
+  font-size: 16px !important;
+}
+.sidebar-wrapper {
+  background-color: #0B0B47 !important;
+  border-top-right-radius:  9px;
+  border-top-left-radius:  9px;
+}
+.sidebar {
+  border-top-right-radius:  10px;
+  border-top-left-radius:  10px;
+}
+.main-panel {
+  border-top:  2px #0B0B47 !important;
+}
+/*not in use*/
+.logo-img img{
+  border-radius: 10px;
+  height:20px;
+  width:25px;
+}
+/*updated logo img and container (in use) */
+.update-logo {
+  width:80%;
+  margin-left:10%;
+  margin-top:10%;
+  padding-bottom: 5.5%;
+  border-bottom: 1px solid white;
+}
+  /*form style edits*/
+.form-check {
+  margin-left: 35px;
+}
+
+.form-check h4 {
+  font-size: 13px;
+}
+/*form text color for edit and add*/
+.form-control {
+  color: silver !important;
+  text-shadow: 0.5px 0.5px black;
+}
+/*edit form headers on edit employee modal*/
+h5 {
+  color: black !important;
+}
+
+.h4ViewModals {
+  color: black !important;
+  margin-top: auto;
+}
+.h5ViewModals {
+  margin-top: auto;
+}
+
+/* hide original file upload box */ 
+.upload-file-button {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+/* style new image submit box */
+.upload-file-button  + label {
+    font-size: 1em;
+    font-weight: 900;
+    background-color: #0B0B47;
+    display: inline-block;
+    padding:10px 40px 10px 40px;
+    border-radius: 10px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    color:white;
+}
+.upload-file-button:focus + label,
+.upload-file-button + label:hover {
+    background-color: #0B0B47;
+    color:white;
+    border-radius: 10px;
+}
+.upload-file-button + label {
+  cursor: pointer; /* "hand" cursor */
+}
+/*Employee List button pop up details on hover*/
+#wrapper {
+  position:relative;
+  float:right;
+  margin-right:30px;
+  visibility:visible;
+  width: 0px;
+}
+.text {
+  position:absolute;
+  bottom:30px;
+  left:-20px;
+  width: 75px;
+  display: none;
+  font-weight: 500;
+}
+#wrapper:hover .text {
+  display: block;
+  background-color: #0B0B47;
+  text-align: center;
+  border-radius: 15px;
+}
+/*h2 span class underline for header texts on add employee page*/
+span {
+  border-bottom: 1px solid white;
+}
+/*multiple choice text color*/
+option {
+  color: black;
+}
+/*radius buttons*/
+.form-check-input {
+  background-color: silver !important;
+  color: black !important;
+}
+.form-check-input {
+     -webkit-appearance: none;
+     -moz-appearance: none;
+     appearance: none;
+     display: inline-block;
+     position: relative;
+     background-color: #f1f1f1;
+     color: black;
+     top: 4px;
+     height: 15px;
+     width: 15px;
+     border: 0;
+     border-radius: 50px;
+     cursor: pointer;     
+     margin-right: 7px;
+     outline: none;
+}
+.form-check-input:checked::before {
+     position: absolute;
+     font: 12px/1 'Open Sans', sans-serif;
+     left: 4px;
+     top: 1px;
+     content: '\02143';
+     transform: rotate(40deg);
+}
+/*disabled field style for consultant_id field (editable modal)*/
+input:disabled {
+   background-color: rgba(255, 255, 255, 0.8) !important;
+}
+/*hide counsultant_id field from client side
+ needs to remain on document so updates to DB can be updated successfully*/
+.hidefromclient {
+  display: none;
+}
+/* edit modals margin from top of page */
+.modal {
+  margin-top: -1300px !important;
+  z-index: 9999;
+}
+.view-modal {
+  z-index: 9990;
+  /*margin-top: -1400px !important;*/
+}
+.modal-dialog {
+    
+}
+.form-check-input:hover {
+     background-color: #f7f7f7;
+}
+.form-check-input:checked
+{
+     background-color: #f1f1f1;
+}
+/*footer link*/
+.copyright a {
+  color: #76FFCE;
+}
+.copyright a:hover {
+  color: white; 
+}
+.icon-heart-2 {
+  color: #76FFCE;
+}
+@media all and (min-width: 992px) {
+  .sidebar .nav>li.active-pro {
+    position: absolute;
+    width: 100%;
+    bottom: 10px;
+  }
+}
+/*override edit-modal width for employee list page*/
+@media (min-width: 576px) {
+.modal-dialog {
+    max-width: 900px !important;
+    margin: 1.75rem auto;
+  }
+}
+.card.card-upgrade .card-category {
+  max-width: 530px;
+  margin: 0 auto;
+
+}
