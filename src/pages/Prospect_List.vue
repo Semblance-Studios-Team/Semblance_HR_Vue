@@ -53,6 +53,17 @@
           <a  class="dropdown-item hoverBlue" @click="getList" >All</a>
           <a  class="dropdown-item hoverBlue" @click="searchStatusYes" >Contacted</a>
           <a  class="dropdown-item hoverBlue" @click="searchStatusNo" >Not Contacted </a>
+      </base-dropdown>
+      <base-dropdown class="base-dropdown"
+                      menu-classes="dropdown-black"
+                      title-classes="btn btn-secondary"
+                      title="Hot or Cold"
+                      style="padding-right: 10px"
+                      >
+          <h6 class="dropdown-header">Select Status</h6>
+          <a  class="dropdown-item hoverBlue" @click="getList" >All</a>
+          <a  class="dropdown-item hoverBlue" @click="searchHot" >Hot</a>
+          <!--<a  class="dropdown-item hoverBlue" @click="searchCold" >Cold</a>-->
       </base-dropdown>       
       </div>
      <div id="main" > 
@@ -392,6 +403,23 @@
             <option>Yes</option>
           </select>
         </base-input>
+
+      <!--New code by Kenny 12/29/2020-->
+        <base-input
+          class="col-md-4"
+          name="hotAndCold"
+          v-model="infoModal.hotAndCold"
+          type="text"
+          label="Hot or Cold"
+          placeholder="Hot or Cold"
+        ><select name="hotAndCold" class="form-control">
+            <option selected>{{infoModal.hotAndCold}}  </option> 
+            <option>Cold</option>
+            <option>Hot</option>
+          </select>
+        </base-input>
+      <!--End new code by Kenny 12/29/2020-->
+
       </div>
 
         <div class="form-row hidefromclient">
@@ -576,6 +604,19 @@
             {{infoModal.contactedThisMonth}}
           </h5>
           </div>
+          
+          <!-- New code by Kenny 12/29/20-->
+          <div class="form-row">
+          <h4 class="col-md-3 h4ViewModals"> Hot or Cold: </h4>
+          <h5
+            class="col-md-3 h5ViewModals"
+            v-model="infoModal.hotAndCold"
+          >
+            {{infoModal.hotAndCold}}
+          </h5>
+          </div>
+          <!-- End new code by Kenny 12/29/20-->
+          
            <div class="form-row">
 
              <h4 class="col-md-3 h4ViewModals"> Comment: </h4>
@@ -586,6 +627,7 @@
             {{infoModal.comment}}
           </h5>
           </div>
+
     <div id="toggle">
      <h5 style="margin-bottom: 20px; border-bottom:1px solid black;">Employee Information Continued</h5>
       <div class="form-row">
@@ -895,7 +937,7 @@ export default {
       try { 
         //http://localhost:8081/prospects/prospectList
         //https://dad59dxvm7.execute-api.us-east-1.amazonaws.com/admin/prospects
-        const list = await axios.get(`https://dad59dxvm7.execute-api.us-east-1.amazonaws.com/admin/prospects`);
+        const list = await axios.get(`http://localhost:8081/prospects/prospectList`);
         this.info = list.data;
         console.log(this.info);
         this.info.sort(function(a, b) {
@@ -967,6 +1009,7 @@ export default {
         }
           
        },
+    
     editInfo(e) {
       const tr = e.target.parentNode.parentNode.parentNode.parentNode.getAttribute("id");
       console.log(tr);

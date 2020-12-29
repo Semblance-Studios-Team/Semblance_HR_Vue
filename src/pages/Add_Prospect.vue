@@ -87,6 +87,21 @@
           </select>
         </base-input>
 
+        <!-- New code by Kenny 12/29/20-->
+        <base-input
+          class="col-md-4"
+          name="hotAndCold"
+          v-model="data.hotAndCold"
+          type="text"
+          label="Hot and Cold*"
+          placeholder="Hot or Cold"
+          >
+          <select name="hotAndCold" class="form-control">
+            <option selected>Cold</option>
+            <option>Hot</option>
+          </select>
+        </base-input>
+      <!-- End new code by Kenny 12/29/20-->
       </div>
 
       <div class="form-row">
@@ -590,7 +605,7 @@ export default {
         //http://localhost:8081/prospects
         //https://dad59dxvm7.execute-api.us-east-1.amazonaws.com/admin/prospects
       axios
-        .post("https://dad59dxvm7.execute-api.us-east-1.amazonaws.com/admin/prospects", formValues)
+        .post("http://localhost:8081/prospects", formValues)
         .then(response => {
           console.log(response);
           alert("Thank you, Prospect has been added to the Database.");
