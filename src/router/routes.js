@@ -4,7 +4,7 @@ import loginLayout from "@/layout/login/loginLayout.vue";
 import notFound from "@/pages/notFoundPage.vue";
 
 // hr pages
-import Login from "@/pages/Login.vue";
+import Login from "@/pages/login.vue";
 import Add_Employee from "@/pages/Add_Employee.vue";
 import Employee_List from "@/pages/Employee_List.vue";
 import Add_Client from "@/pages/Add_Client.vue";

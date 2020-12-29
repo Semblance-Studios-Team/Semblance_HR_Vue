@@ -245,7 +245,8 @@
             <option selected>
               {{infoModal.workAddress_stateProvince}} 
             </option>
-             <option selected>AK</option>
+
+             <option >AK</option>
            <option >AL</option>
            <option>AR</option>
            <option>AZ</option>           
