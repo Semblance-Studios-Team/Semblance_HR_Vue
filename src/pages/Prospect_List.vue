@@ -75,7 +75,8 @@
         <th>Company Name</th>
         <th>Internal Contact's Name</th>
         <th>Contact Email</th> 
-        <th> Contacted This Month?</th>
+        <th> Contacted </th>
+        <th> Hot Or Cold</th>
         <th class="text-right">Actions</th>
       </template>
       <!-- v-if="
@@ -104,6 +105,11 @@
         <td >
           <button  class="buttonChange" @click="(t) =>viewInfo(t)">
             {{row.contactedThisMonth}}
+          </button>
+        </td>
+        <td >
+          <button  class="buttonChange" @click="(t) =>viewInfo(t)">
+            {{row.hotAndCold}}
           </button>
         </td>
         <td class="td-actions text-right">
@@ -1006,6 +1012,23 @@ export default {
         if ( this.status = "No") {
           var statusResultNo = myStatusArrayNo.filter(myStatusArrayNo => !this.status || myStatusArrayNo.contactedThisMonth.toLowerCase().includes(this.status.toLowerCase()))
           this.info = statusResultNo;
+        }
+          
+       },
+       async searchHot() {
+       await this.getList();
+        let newArray = [];
+        newArray = this.info;
+        this.status = "Hot";
+        console.log('========1');
+        console.log(newArray);
+       
+        if ( this.status == "Hot") {
+          console.log('if is fired');
+          var result = newArray.filter(newArray => !this.status || newArray.hotAndCold.includes(this.status))
+          this.info = result;
+          console.log('this.info');
+          console.log(this.info);
         }
           
        },
