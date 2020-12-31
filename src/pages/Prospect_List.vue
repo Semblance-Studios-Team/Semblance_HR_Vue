@@ -63,7 +63,7 @@
           <h6 class="dropdown-header">Select Status</h6>
           <a  class="dropdown-item hoverBlue" @click="getList" >All</a>
           <a  class="dropdown-item hoverBlue" @click="searchHot" >Hot</a>
-          <!--<a  class="dropdown-item hoverBlue" @click="searchCold" >Cold</a>-->
+          <a  class="dropdown-item hoverBlue" @click="searchCold" >Cold</a>
       </base-dropdown>       
       </div>
      <div id="main" > 
@@ -1020,15 +1020,25 @@ export default {
         let newArray = [];
         newArray = this.info;
         this.status = "Hot";
-        console.log('========1');
-        console.log(newArray);
        
         if ( this.status == "Hot") {
           console.log('if is fired');
           var result = newArray.filter(newArray => !this.status || newArray.hotAndCold.includes(this.status))
           this.info = result;
-          console.log('this.info');
-          console.log(this.info);
+        }
+          
+       },
+
+       async searchCold() {
+       await this.getList();
+        let newArray = [];
+        newArray = this.info;
+        this.status = "Cold";
+       
+        if ( this.status == "Cold") {
+          console.log('if is fired');
+          var result = newArray.filter(newArray => !this.status || newArray.hotAndCold.includes(this.status))
+          this.info = result;
         }
           
        },
