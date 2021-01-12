@@ -28,8 +28,8 @@
           name="newAdminGroup"
           v-model="data.newAdminGroup"
           type="text"
-          label="Select Admin Group"
-          placeholder="Select Admin Group"
+          label="Select New Admin Group"
+          placeholder="Select New Admin Group"
           >
           <select name="newAdminGroup" class="form-control">
             <option selected>Low_Level_Admins</option>
@@ -39,20 +39,18 @@
       </div>
 
 
-
-       <!--  <div class="form-row hidefromclient">
+       <div class="form-row hidefromclient">
         <fieldset disabled>
          <base-input 
            class="col-md-12"
-           name="lastEditedBy"
-           label="Database ID (Disabled)" 
-           v-model="data.lastEditedBy" 
+           name="currentUserPool"
+           label="current userpool ID (Disabled)" 
+           v-model="data.currentUserPool" 
            type="text" 
          />
        </fieldset>
-      </div> -->
+      </div>
       
-      <!-- with image upload (onUpload)-->
        <base-button 
         style="float: right; margin-top: 0px;"
         class="animation-on-hover" 
@@ -63,7 +61,10 @@
 
     </form>
     <div class="form-row">
+      
       <ul class="col-md-6">
+        <li>THIS PAGE IS CURRENTLY NOT PREPARED FOR PRODUCTION
+       </li>
        <li>Select which admin you want to change privileges for
        </li>
         <li>Low Level Admins cant DELETE items, only ADD, UPDATE and READ
@@ -112,6 +113,41 @@ export default {
           console.log(error);
         });
     },
+    async userGroupCheck() { 
+
+      await Auth.currentUserInfo()
+          .then(info => {
+            var userEmail = info.attributes.email;
+            var userName = info.username;
+
+            console.log('userEmail');
+            console.log(userEmail);
+
+            console.log('userName'); 
+            console.log(userName);  
+         });
+
+        await Auth.currentAuthenticatedUser({
+            bypassCache: true
+        }).then(user => {
+
+          this.userGroup = user.signInUserSession.idToken.payload[
+          'cognito:groups'];
+          console.log(this.userGroup);
+
+         const userGroupValues = {
+           group: this.userGroup,
+           username: this.userName
+         };
+         
+         console.log(userGroupValues);
+         console.log("group");
+         console.log(userGroupValues.group[0])
+         this.data.currentUserPool = userGroupValues.group[0];
+         console.log(this.data.currentUserPool)
+        });
+
+    }
   },
   beforeCreate() {
       // attach admin user to form 
@@ -122,6 +158,9 @@ export default {
              
      });
     },
+    created() {
+    this.userGroupCheck();
+  },
 };
 </script>
 <style>

@@ -63,7 +63,7 @@
           <h6 class="dropdown-header">Select Status</h6>
           <a  class="dropdown-item hoverBlue" @click="getList" >All</a>
           <a  class="dropdown-item hoverBlue" @click="searchHot" >Hot</a>
-          <!--<a  class="dropdown-item hoverBlue" @click="searchCold" >Cold</a>-->
+          <a  class="dropdown-item hoverBlue" @click="searchCold" >Cold</a>
       </base-dropdown>       
       </div>
      <div id="main" > 
@@ -944,7 +944,7 @@ export default {
       try { 
         //http://localhost:8081/prospects/prospectList
         //https://dad59dxvm7.execute-api.us-east-1.amazonaws.com/admin/prospects
-        const list = await axios.get(`http://localhost:8081/prospects/prospectList`);
+        const list = await axios.get(`https://dad59dxvm7.execute-api.us-east-1.amazonaws.com/admin/prospects`);
         this.info = list.data;
         console.log(this.info);
         this.info.sort(function(a, b) {
@@ -1015,25 +1015,32 @@ export default {
           this.info = statusResultNo;
         }
           
-       },
-       async searchHot() {
+    },
+    async searchHot() {
        await this.getList();
         let newArray = [];
         newArray = this.info;
         this.status = "Hot";
-        console.log('========1');
-        console.log(newArray);
-       
+
         if ( this.status == "Hot") {
           console.log('if is fired');
           var result = newArray.filter(newArray => !this.status || newArray.hotAndCold.includes(this.status))
           this.info = result;
-          console.log('this.info');
-          console.log(this.info);
         }
           
-       },
+    },   
+    async searchCold() {
+       await this.getList();
+        let newArray = [];
+        newArray = this.info;
+        this.status = "Cold";
        
+        if ( this.status == "Cold") {
+          var result = newArray.filter(newArray => !this.status || newArray.hotAndCold.includes(this.status))
+          this.info = result;
+        }
+          
+    },  
     editInfo(e) {
       const tr = e.target.parentNode.parentNode.parentNode.parentNode.getAttribute("id");
       console.log(tr);
@@ -1245,39 +1252,6 @@ export default {
             x.style.display = "block";
          }
     },
-    async userGroupCheck() { 
-
-      await Auth.currentUserInfo()
-          .then(info => {
-            var userEmail = info.attributes.email;
-            var userName = info.username;
-
-            console.log('userEmail');
-            console.log(userEmail);
-
-            console.log('userName'); 
-            console.log(userName);  
-         });
-
-        await Auth.currentAuthenticatedUser({
-            bypassCache: true
-        }).then(user => {
-
-          this.userGroup = user.signInUserSession.idToken.payload[
-          'cognito:groups'];
-          console.log(this.userGroup);
-
-         const userGroupValues = {
-           group: this.userGroup,
-           username: this.userName
-         };
-         console.log("group");
-         console.log(userGroupValues);
-         console.log(userGroupValues.group[0])
-         console.log(typeof userGroupValues.group[0]);
-        });
-
-    }
 
 
 
@@ -1303,7 +1277,6 @@ export default {
   // fire on render
   created() {
     this.getList();
-    this.userGroupCheck();
   },
   beforeCreate() {
       
