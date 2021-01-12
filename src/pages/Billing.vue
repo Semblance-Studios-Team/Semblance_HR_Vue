@@ -1130,19 +1130,23 @@ import BootstrapVue from 'bootstrap-vue';
 import Vue from 'vue';
 import { EventBus } from '../main';
 
-
-// Search Bar fucntionality
-
 // Log-in Authentication 
 import { components } from 'aws-amplify-vue';
 import { AmplifyEventBus } from 'aws-amplify-vue';
 import { Auth } from 'aws-amplify';
+
+//attempt to grant this file access to  crud file
+import crudGlobal from '../globalCRUD';
+//attempt to grant this file access to component crud file
+import { crudComponent } from "@/components";
 
 export default {
   components: {
     BaseTable,
     Modal,
     ModalView,
+    crudGlobal,
+    crudComponent
     
   },
   data() {
@@ -1162,11 +1166,41 @@ export default {
       toggleAorI:true
       
 
-}  
+   }  
   },
   computed: {  
   },
   methods: {
+    async removeRow(r) {
+      const deleteRow = r.target.parentNode.parentNode.parentNode.parentNode.getAttribute("id");
+      this.infoModal = this.info[deleteRow];
+
+        //test here to see if you can access the global file
+        //deleteEntity();
+
+       try {
+       if (confirm('Do you want to delete this Client?')) {
+        let rowId = r.target.parentNode.parentNode.parentNode.parentNode;
+            rowId.parentNode.removeChild(rowId);
+            console.log('rowId');
+            console.log(rowId);
+            //https://7olb5ali48.execute-api.us-east-1.amazonaws.com/admin/consultants
+            //const myRowPost = await axios.post("http://localhost:8081/consultants/remove", this.infoModal)
+            console.log('this.infoModal.client_id');
+            console.log(this.infoModal.client_id);
+            const myRowDelete = await axios.delete(
+            `https://dad59dxvm7.execute-api.us-east-1.amazonaws.com/admin/clients/${this.infoModal.client_id}`)
+            //'http://localhost:8081/consultants/:id', this.infoModal)
+         } else {
+            return 0;
+         }
+       } catch (e) {
+        console.log(`Delete Row Error =`, e);
+        if (e.response.status === 400) {
+          this.error = e.response.data.message;
+        }
+      } 
+    },
     async getList() {
       try { 
         //http://localhost:8081/clients/clientList
@@ -1254,33 +1288,6 @@ export default {
       this.infoModal = this.info[rw];
       console.log(this.infoModal)
       this.modalView = true;
-    },
-    
-    async removeRow(r) {
-      const deleteRow = r.target.parentNode.parentNode.parentNode.parentNode.getAttribute("id");
-      this.infoModal = this.info[deleteRow];
-       try {
-       if (confirm('Do you want to delete this Client?')) {
-        let rowId = r.target.parentNode.parentNode.parentNode.parentNode;
-            rowId.parentNode.removeChild(rowId);
-            console.log('rowId');
-            console.log(rowId);
-            //https://7olb5ali48.execute-api.us-east-1.amazonaws.com/admin/consultants
-            //const myRowPost = await axios.post("http://localhost:8081/consultants/remove", this.infoModal)
-            console.log('this.infoModal.client_id');
-            console.log(this.infoModal.client_id);
-            const myRowDelete = await axios.delete(
-            `https://dad59dxvm7.execute-api.us-east-1.amazonaws.com/admin/clients/${this.infoModal.client_id}`)
-            //'http://localhost:8081/consultants/:id', this.infoModal)
-         } else {
-            return 0;
-         }
-       } catch (e) {
-        console.log(`Delete Row Error =`, e);
-        if (e.response.status === 400) {
-          this.error = e.response.data.message;
-        }
-      } 
     },
    // https://7olb5ali48.execute-api.us-east-1.amazonaws.com/admin/vcards
    //https://7olb5ali48.execute-api.us-east-1.amazonaws.com/admin/vc-upload
