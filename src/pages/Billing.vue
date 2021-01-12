@@ -303,6 +303,15 @@
           label="Company Website*"
           placeholder="Company Website"
         />
+
+        <base-input
+          class="col-md-8"
+          name="comment"
+          v-model="infoModal.comment"
+          type="text"
+          label="Comment"
+          placeholder="Comment"
+        />
       </div>
 
       <div class="form-row">
@@ -841,10 +850,18 @@
           >
             {{infoModal.paidORpending}}
           </h5>
-
+          
          </div>
     
-       
+       <div class="form-row">
+         <h5 class="col-md-3 h4ViewModals"> Comments: </h5>
+          <h5
+           class="col-md-9 h5ViewModals"
+           v-model="infoModal.comment"
+          >
+            {{infoModal.comment}}
+          </h5>
+       </div>
      
     <div id="toggle">
      <h5 style="margin-bottom: 20px; border-bottom:1px solid black;">Employee Information Continued</h5>
@@ -1072,10 +1089,11 @@
         </base-button>
         <base-button 
           type="info" 
-          @click="showORhideToggle"
+         
+         @click="modal = true"
           class="animation-on-hover" 
          >
-           Show / Hide Information
+           Edit Prospect
         </base-button>
       </template>
    </modal-view>
@@ -1153,7 +1171,7 @@ export default {
       try { 
         //http://localhost:8081/clients/clientList
         //https://dad59dxvm7.execute-api.us-east-1.amazonaws.com/admin/clients
-        const list = await axios.get(`https://dad59dxvm7.execute-api.us-east-1.amazonaws.com/admin/clients`);
+        const list = await axios.get(`http://localhost:8081/clients/clientList`);
         this.info = list.data;
         console.log(this.info);
         this.info.sort(function(a, b) {
@@ -1378,7 +1396,7 @@ export default {
          let wNoImageEdit = await axios
             //http://localhost:8081/clients/${this.data.client_id}
             //https://dad59dxvm7.execute-api.us-east-1.amazonaws.com/admin/clients/${this.data.client_id}
-            .put(`https://dad59dxvm7.execute-api.us-east-1.amazonaws.com/admin/clients/${this.data.client_id}`, formValues)
+            .put(`http://localhost:8081/clients/${this.data.client_id}`, formValues)
             .then(response => {
               console.log(response);
             })

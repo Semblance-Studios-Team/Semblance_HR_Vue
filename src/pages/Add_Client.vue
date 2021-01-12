@@ -137,6 +137,16 @@ Company Phone Number
           label="Company Website"
           placeholder="Company Website"
         />
+
+        <base-input
+          class="col-md-8"
+          name="comment"
+          v-model="data.comment"
+          type="text"
+          label="Comment"
+          placeholder="Comment"
+        />
+        
       </div>
 
       <div class="form-row">
@@ -593,7 +603,7 @@ export default {
         //http://localhost:8081/clients
         //https://dad59dxvm7.execute-api.us-east-1.amazonaws.com/admin/clients
       axios
-        .post("https://dad59dxvm7.execute-api.us-east-1.amazonaws.com/admin/clients", formValues)
+        .post("http://localhost:8081/clients", formValues)
         .then(response => {
           console.log(response);
           alert("Thank you, Client has been added to the Database.");
