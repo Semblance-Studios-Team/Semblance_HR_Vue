@@ -1118,6 +1118,8 @@
   </div>
 </template>
 <script>
+// Look to see if vanilla javascript will be able to access crud file from here
+
 import { props, BaseTable } from "@/components";
 import { Modal } from "@/components";
 import { ModalView } from "@/components";
@@ -1127,7 +1129,6 @@ import QRCode from "qrcode";
 import vCardsJS from "vcards-js";
 import { saveAs } from 'file-saver';
 import BootstrapVue from 'bootstrap-vue';
-import Vue from 'vue';
 import { EventBus } from '../main';
 
 // Log-in Authentication 
@@ -1136,9 +1137,13 @@ import { AmplifyEventBus } from 'aws-amplify-vue';
 import { Auth } from 'aws-amplify';
 
 //attempt to grant this file access to  crud file
-import crudGlobal from '../globalCRUD';
+import * as crudGlobal from '../globalCRUD';
 //attempt to grant this file access to component crud file
-import { crudComponent } from "@/components";
+// import { crudComponent } from "@/components";
+
+// Import mixin file
+//import 'src\mixins\generalMixins.js';
+
 
 export default {
   components: {
@@ -1146,7 +1151,7 @@ export default {
     Modal,
     ModalView,
     crudGlobal,
-    crudComponent
+    // crudComponent
     
   },
   data() {
@@ -1164,33 +1169,33 @@ export default {
       searchResult: [],
       status: '',
       toggleAorI:true
-      
-
    }  
   },
   computed: {  
   },
   methods: {
+    
     async removeRow(r) {
-      const deleteRow = r.target.parentNode.parentNode.parentNode.parentNode.getAttribute("id");
-      this.infoModal = this.info[deleteRow];
-
-        //test here to see if you can access the global file
-        //deleteEntity();
 
        try {
        if (confirm('Do you want to delete this Client?')) {
-        let rowId = r.target.parentNode.parentNode.parentNode.parentNode;
-            rowId.parentNode.removeChild(rowId);
-            console.log('rowId');
-            console.log(rowId);
-            //https://7olb5ali48.execute-api.us-east-1.amazonaws.com/admin/consultants
-            //const myRowPost = await axios.post("http://localhost:8081/consultants/remove", this.infoModal)
-            console.log('this.infoModal.client_id');
-            console.log(this.infoModal.client_id);
-            const myRowDelete = await axios.delete(
-            `https://dad59dxvm7.execute-api.us-east-1.amazonaws.com/admin/clients/${this.infoModal.client_id}`)
-            //'http://localhost:8081/consultants/:id', this.infoModal)
+         const deleteRow = r.target.parentNode.parentNode.parentNode.parentNode.getAttribute("id");
+          this.infoModal = this.info[deleteRow];
+          
+          var index = deleteRow;
+          var entityId = this.infoModal.client_id;
+
+          let htmlFromSelectedRow = r.target.parentNode.parentNode.parentNode.parentNode;
+          htmlFromSelectedRow.parentNode.removeChild(htmlFromSelectedRow);
+
+          var rowHtml = htmlFromSelectedRow;
+
+          var entityType  = 'clients';
+          crudGlobal.deleteEntity(entityType, entityId, index, rowHtml);
+
+              // const myRowDelete = await axios.delete(
+              // `https://dad59dxvm7.execute-api.us-east-1.amazonaws.com/admin/clients/${this.infoModal.client_id}`)
+              //'http://localhost:8081/consultants/:id', this.infoModal)
          } else {
             return 0;
          }

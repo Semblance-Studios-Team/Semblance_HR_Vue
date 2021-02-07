@@ -1069,9 +1069,13 @@ export default {
             //const myRowPost = await axios.post("http://localhost:8081/consultants/remove", this.infoModal)
             console.log('this.infoModal.client_id');
             console.log(this.infoModal.client_id);
-            const myRowDelete = await axios.delete(
-            `https://dad59dxvm7.execute-api.us-east-1.amazonaws.com/admin/prospects/${this.infoModal.prospect_id}`)
-            //'http://localhost:8081/consultants/:id', this.infoModal)
+            
+            // Added delete new global method
+            var entityType = 'prospects';
+            crudGlobal.deleteEntity(entityType, entityId, index, rowHtml); // remove last 2 parameters ?
+            // const myRowDelete = await axios.delete(
+            // `https://dad59dxvm7.execute-api.us-east-1.amazonaws.com/admin/prospects/${this.infoModal.prospect_id}`)
+            // //'http://localhost:8081/consultants/:id', this.infoModal)
          } else {
             return 0;
          }
