@@ -1210,7 +1210,7 @@ export default {
       try { 
         //http://localhost:8081/clients/clientList
         //https://dad59dxvm7.execute-api.us-east-1.amazonaws.com/admin/clients
-        const list = await axios.get(`http://localhost:8081/clients/clientList`);
+        const list = await axios.get(`https://dad59dxvm7.execute-api.us-east-1.amazonaws.com/admin/clients`);
         this.info = list.data;
         console.log(this.info);
         this.info.sort(function(a, b) {
