@@ -503,7 +503,7 @@
           <base-input
             class="col-md-3"
             name="inscricaoMunicipal"
-            v-model="data.inscricaoMunicipal"
+            v-model="data.inscricaoMunicipal" 
             type="text"
             label="Inscrição Municipal"
             placeholder="Inscrição Municipal"
@@ -627,7 +627,6 @@ export default {
             formValues.push({ [name]: value });
           }
       formValues = Object.assign({}, ...formValues);
-      //console.log("------------data",this.data)
       this.data = formValues;
 
       //admin user 
@@ -648,23 +647,6 @@ export default {
       } if (formValues.lastName == "") {
           alert('Last Name is REQUIRED! Please fix.');
       } 
-      //if (formValues.title == "") {
-      //     alert('Title is REQUIRED! Please fix.');
-      // } if (formValues.workEmail == "") {
-      //     alert('Work Email is REQUIRED! Please fix.');
-      // } if (formValues.workAddress_street == "") {
-      //     alert('Work Address is REQUIRED! Please fix.');
-      // } if (formValues.workAddress_city == "") {
-      //     alert('Work City is REQUIRED! Please fix.');
-      // } if (formValues.workAddress_stateProvince == "") {
-      //     alert('Work State / Province is REQUIRED! Please fix.');
-      // } if (formValues.workAddress_postalCode == "") {
-      //     alert('Work Postal Code is REQUIRED! Please fix.');
-      // } if (formValues.workWebsite == "") {
-      //     alert('Work Website is REQUIRED! Please fix.');
-      // } if (formValues.cellPhone == "") {
-      //     alert('Cell Phone is REQUIRED! Please fix.');
-      // }
       else {
         //http://localhost:8081/consultants
         //https://dad59dxvm7.execute-api.us-east-1.amazonaws.com/admin/consultants

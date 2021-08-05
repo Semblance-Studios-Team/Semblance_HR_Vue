@@ -386,315 +386,6 @@
         </base-input>
       </div>
       
-
-      <!--
-    <h5>Edit Employee Information</h5>
-      <div class="form-row">
-       <base-input 
-        class="col-md-4" 
-        name="personalEmail" 
-        v-model="infoModal.personalEmail"
-        label="Personal Email" 
-       />
-       <base-input 
-        class="col-md-4" 
-        name="dob" 
-        v-model="infoModal.dob"
-        label="Date of Birth" 
-        placeholder="MM/DD/YYYY"
-       />
-        <base-input
-          class="col-md-4"
-          name="homeAddress_street"
-          v-model="infoModal.homeAddress_street"
-          label="Home Address"
-        />
-      </div>
-      <div class="form-row">
-        <base-input 
-        class="col-md-4" 
-        name="homeAddress_city" 
-        v-model="infoModal.homeAddress_city"
-        label="City" 
-       />
-        <base-input 
-         class="col-md-4" 
-         name="homeAddress_stateProvince"
-         v-model="infoModal.homeAddress_stateProvince"
-         type="text" 
-         label=" State / Province" 
-        />
-        <base-input
-          class="col-md-4"
-          name="homeAddress_postalCode"
-          v-model="infoModal.homeAddress_postalCode"
-          label="CEP / ZIP"
-        />
-      </div>
-      <div class="form-row">
-        <base-input
-          class="col-md-4"
-          name="mothersName"
-          v-model="infoModal.mothersName"
-          type="text"
-          label="Mothers Name"
-        />
-        <base-input
-          class="col-md-4"
-          name="fathersName"
-          v-model="infoModal.fathersName"
-          type="text"
-          label="Fathers Name"
-        />
-        <base-input
-          class="col-md-4"
-          name="maritalStatus"
-          v-model="infoModal.maritalStatus"
-          type="text"
-          label="Marital Status"
-        >
-          <select 
-           name="maritalStatus" 
-           id="inputState" 
-           class="form-control">
-            <option selected>
-             {{infoModal.maritalStatus}}
-            </option>
-            <option>Single</option>
-            <option>Married</option>
-            <option>Divorced</option>
-          </select>
-        </base-input>
-      </div>
-      <div class="form-row">
-        <base-input 
-         class="col-md-3" 
-         name="rgDL" 
-         v-model="infoModal.rgDL"
-         type="text" 
-         label="RG / DL" 
-        />
-        <base-input
-          class="col-md-3"
-          name="expeditor"
-          v-model="infoModal.expeditor"
-          type="text"
-          label="Expeditor"
-        />
-        <base-input
-          class="col-md-3"
-          name="expeditionDate"
-          v-model="infoModal.expeditionDate"
-          type="text"
-          label="Expedition Date"
-        />
-        <base-input 
-         class="col-md-3" 
-         name="cpf" 
-         v-model="infoModal.cpf"
-         type="text" 
-         label="CPF" 
-        />
-      </div>
-      <br><br>
-      <h5> Edit Company Information </h5>
-       <div class="form-row">
-        <base-input
-          class="col-md-4"
-          name="startDate"
-          v-model="infoModal.startDate"
-          type="text"
-          label="Start Date"
-          placeholder="MM/DD/YYYY"
-        />
-        <base-input
-          class="col-md-4"
-          name="endDate"
-          v-model="infoModal.endDate"
-          type="text"
-          label="End Date"
-          placeholder="MM/DD/YYYY"
-        />
-        <base-input
-          class="col-md-4"
-          name="viviCompany"
-          v-model="infoModal.viviCompany"
-          type="text"
-          label="Vivi Company"
-         >
-          <select name="viviCompany" id="inputState" class="form-control">
-            <option selected>
-              {{infoModal.viviCompany}}
-            </option>
-            <option>ViviTech</option>
-            <option>ViviPay</option>
-            <option>ViviHoldings</option>
-          </select>
-        </base-input>
-      </div>
-      <div class="form-row">
-        <base-input
-          class="col-md-4"
-          name="department"
-          v-model="infoModal.department"
-          type="text"
-          label="Department"
-        >
-          <select name="department" id="depo" class="form-control">
-            <option selected>
-              {{infoModal.department}}
-            </option>
-            <option>Finance</option>
-            <option>Adminstrative</option>
-            <option>Commercial</option>
-            <option>Marketing</option>
-            <option>Information Technology</option>
-            <option>Operations</option>
-            <option>PMO</option>
-            <option>Human Resources</option>
-          </select>
-        </base-input>
-        <base-input
-          class="col-md-4"
-          name="basedIn"
-          v-model="infoModal.basedIn"
-          type="text"
-          label="Based In"
-          >
-          <select 
-             name="basedIn" 
-             id="inputState" 
-             class="form-control">
-            <option selected>
-              {{infoModal.basedIn}}
-            </option>
-            <option>Aracaju</option>
-            <option>Blumenau</option>
-            <option>Boca Raton</option>
-            <option>Maceió</option>
-            <option>São Paulo</option>
-            <option>Other</option>
-          </select>
-        </base-input>
-        <base-input
-          class="col-md-4"
-          name="workingClient"
-          v-model="infoModal.workingClient"
-          type="text"
-          label="Working Client"
-        />
-      </div>
-       <div class="form-row hidefromclient">
-        <fieldset disabled>
-         <base-input 
-           class="col-md-12"
-           name="consultant_id"
-           label="Database ID (Disabled)" 
-           v-model="infoModal.consultant_id" 
-           type="text" 
-         />
-       </fieldset>
-      </div>
-      <br>
-      <br>
-      <div class="form-check">
-        <input
-          class="form-check-input"
-          type="radio"
-          name="cltPj"
-          id="clt"
-          value="cltPj(notImportantField)"
-          v-model="infoModal.cltPj"
-          v-on:click="hide()"
-        >
-        <label class="form-check-label" for="clt">
-          <h5>CLT / W2</h5>
-        </label>
-      </div>
-      <div class="form-check">
-        <input
-          class="form-check-input"
-          name="cltPj"
-          type="radio"
-          id="pj"
-          value="Pj(notImportantField)"
-          v-model="infoModal.cltPj"
-          v-on:click="show()" 
-        >
-        <label class="form-check-label" for="pj">
-          <h5>PJ / 1099</h5>
-        </label>
-      </div>
-      <br><br>
-        <div id="showHide">
-        <h5> Edit Employee Company Information (1099 / PJ) </h5>
-        <div class="form-row">
-          <base-input 
-            class="col-md-3" 
-            name="razao" 
-            v-model="infoModal.razao"
-            type="text" 
-            label="Razão Social" 
-           />
-          <base-input 
-            class="col-md-3" 
-            name="cnpj"
-            v-model="infoModal.cnpj" 
-            type="text" 
-            label="CNPJ/EIN" 
-           />
-          <base-input
-            class="col-md-3"
-            name="nomeFantasia"
-            v-model="infoModal.nomeFantasia"
-            type="text"
-            label="Nome Fantasia"
-          />
-          <base-input
-            class="col-md-3"
-            name="inscricaoEstadual"
-            v-model="infoModal.inscricaoEstadual"
-            type="text"
-            label="Inscrição Estadual"
-          />
-        </div>
-        <div class="form-row">
-          <base-input
-            class="col-md-3"
-            name="inscricaoMunicipal"
-            v-model="infoModal.inscricaoMunicipal"
-            type="text"
-            label="Inscrição Municipal"
-          />
-          <base-input
-            class="col-md-3"
-            name="enderecoDaEmpresa"
-            v-model="infoModal.enderecoDaEmpresa"
-            type="text"
-            label="Endereço da Empresa"
-          />
-          <base-input
-            class="col-md-3"
-            name="optante"
-            v-model="infoModal.optante"
-            type="text"
-            label="Optante"
-          />
-          <base-input
-            class="col-md-3"
-            name="contractNumber"
-            v-model="infoModal.contractNumber"
-            type="text"
-            label="Contract Number"
-          />
-        </div> -->
-
-
-      <!-- </div> -->
-
-       
-
-
       </form>
       <template slot="footer">
         <base-button 
@@ -1136,13 +827,8 @@ import { components } from 'aws-amplify-vue';
 import { AmplifyEventBus } from 'aws-amplify-vue';
 import { Auth } from 'aws-amplify';
 
-//attempt to grant this file access to  crud file
+//grant this file access to  crud file
 import * as crudGlobal from '../globalCRUD';
-//attempt to grant this file access to component crud file
-// import { crudComponent } from "@/components";
-
-// Import mixin file
-//import 'src\mixins\generalMixins.js';
 
 
 export default {
@@ -1174,43 +860,11 @@ export default {
   computed: {  
   },
   methods: {
-    
-    async removeRow(r) {
-
-       try {
-       if (confirm('Do you want to delete this Client?')) {
-         const deleteRow = r.target.parentNode.parentNode.parentNode.parentNode.getAttribute("id");
-          this.infoModal = this.info[deleteRow];
-          
-          var index = deleteRow;
-          var entityId = this.infoModal.client_id;
-
-          let htmlFromSelectedRow = r.target.parentNode.parentNode.parentNode.parentNode;
-          htmlFromSelectedRow.parentNode.removeChild(htmlFromSelectedRow);
-
-          var rowHtml = htmlFromSelectedRow;
-
-          var entityType  = 'clients';
-          crudGlobal.deleteEntity(entityType, entityId, index, rowHtml);
-
-              // const myRowDelete = await axios.delete(
-              // `https://dad59dxvm7.execute-api.us-east-1.amazonaws.com/admin/clients/${this.infoModal.client_id}`)
-              //'http://localhost:8081/consultants/:id', this.infoModal)
-         } else {
-            return 0;
-         }
-       } catch (e) {
-        console.log(`Delete Row Error =`, e);
-        if (e.response.status === 400) {
-          this.error = e.response.data.message;
-        }
-      } 
-    },
     async getList() {
       try { 
         //http://localhost:8081/clients/clientList
         //https://dad59dxvm7.execute-api.us-east-1.amazonaws.com/admin/clients
-        const list = await axios.get(`https://dad59dxvm7.execute-api.us-east-1.amazonaws.com/admin/clients`);
+        const list = await axios.get(`http://localhost:8081/clients/clientList`);
         this.info = list.data;
         console.log(this.info);
         this.info.sort(function(a, b) {
@@ -1231,6 +885,53 @@ export default {
           this.error = e.response.data.message;
         }
       }
+    },
+    async removeRow(r) {
+       try {
+       if (confirm('Do you want to delete this Client?')) { 
+          const deleteRow = r.target.parentNode.parentNode.parentNode.parentNode.getAttribute("id");
+          this.infoModal = this.info[deleteRow];
+          
+          //var index = deleteRow;
+          var entityId = this.infoModal.client_id;
+
+          let htmlFromSelectedRow = r.target.parentNode.parentNode.parentNode.parentNode;
+          htmlFromSelectedRow.parentNode.removeChild(htmlFromSelectedRow);
+
+          //var rowHtml = htmlFromSelectedRow;
+
+          var entityType  = 'clients';
+          crudGlobal.deleteEntity(entityType, entityId);
+
+         } else {
+            return 0;
+         }
+       } catch (e) {
+        console.log(`Delete Row Error =`, e);
+        if (e.response.status === 400) {
+          this.error = e.response.data.message;
+        }
+      } 
+    },
+    async handleSubmit () {
+      let formValues = [];
+      const inputs = document.querySelectorAll(".edit-modal input, select");
+      for (let input of inputs) {
+            let name = input.name;
+            let value = input.value;
+        formValues.push({ [name]: value });
+      }
+      formValues = Object.assign({}, ...formValues);
+
+      var entityType  = 'clients';
+      var entityId = this.infoModal.client_id;
+      this.data = formValues;
+
+      crudGlobal.updateEntity(entityType, entityId, formValues);  
+
+      this.modal = false;
+      this.refreshOnExit += 1;
+     
     },
     searchList() {
       // let str = JSON.stringify(this.userSearchInput);
@@ -1364,60 +1065,6 @@ export default {
        }  catch (e) {
           console.log(`vcard error / Front end =`, e);
       } 
-    },
-    async handleSubmit () {
-      let formValues = [];
-          const inputs = document.querySelectorAll(".edit-modal input, select");
-          for (let input of inputs) {
-               let name = input.name;
-               let value = input.value;
-            formValues.push({ [name]: value });
-          }
-          formValues = Object.assign({}, ...formValues);
-          this.data = formValues;
-          console.log(formValues)
-         
-         //admin user 
-
-         // attach current admin user to form 
-          await Auth.currentUserInfo()
-          .then(info => {
-            var userEmail = info.attributes.email;
-            var userName = info.username;
-            console.log('12');
-            //console.log(userEmail);
-            console.log(userName);  
-            this.data.lastEditedBy = userName;
-            formValues.lastEditedBy = this.data.lastEditedBy;
-            //add edit timestamp
-            var timestamp = Number(new Date());
-            const date = new Date(timestamp).toDateString();
-            this.data.timeStampEdit = date;
-         });
-
-         var string = "";
-         if (formValues.companyName == "") {
-            alert('Company Name is REQUIRED! Please fix.');
-            string ="string";
-            console.log('STRING 1')
-          } 
-
-       //with no image
-      if (string !== "string" && this.employeePic == undefined){
-        console.log('HERE-------');
-         let wNoImageEdit = await axios
-            //http://localhost:8081/clients/${this.data.client_id}
-            //https://dad59dxvm7.execute-api.us-east-1.amazonaws.com/admin/clients/${this.data.client_id}
-            .put(`http://localhost:8081/clients/${this.data.client_id}`, formValues)
-            .then(response => {
-              console.log(response);
-            })
-            .catch(error => {
-              console.log(error);
-            });
-          this.modal = false;
-          this.refreshOnExit += 1;
-      }
     },
     statusButtons(s) {
       let statusButton = s.target.parentNode;

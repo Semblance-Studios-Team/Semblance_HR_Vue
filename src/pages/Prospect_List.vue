@@ -910,11 +910,15 @@ import { components } from 'aws-amplify-vue';
 import { AmplifyEventBus } from 'aws-amplify-vue';
 import { Auth } from 'aws-amplify';
 
+//grant this file access to crud file
+import * as crudGlobal from '../globalCRUD';
+
 export default {
   components: {
     BaseTable,
     Modal,
     ModalView,
+    crudGlobal
     
   },
   data() {
@@ -933,18 +937,16 @@ export default {
       searchResult: [],
       status: '',
       toggleAorI:true
-      
-
 }  
   },
-  computed: {  
+  computed: {   
   },
   methods: {
     async getList() {
       try { 
         //http://localhost:8081/prospects/prospectList
-        //https://dad59dxvm7.execute-api.us-east-1.amazonaws.com/admin/prospects
-        const list = await axios.get(`https://dad59dxvm7.execute-api.us-east-1.amazonaws.com/admin/prospects`);
+        //https://dad59dxvm7.execute-api.us-east-1.amazonaws.com/admin/prospects 
+        const list = await axios.get(`https://dad59dxvm7.execute-api.us-east-1.amazonaws.com/admin/prospects `);
         this.info = list.data;
         console.log(this.info);
         this.info.sort(function(a, b) {
@@ -1055,27 +1057,19 @@ export default {
       console.log(this.infoModal)
       this.modalView = true;
     },
-    
     async removeRow(r) {
-      const deleteRow = r.target.parentNode.parentNode.parentNode.parentNode.getAttribute("id");
-      this.infoModal = this.info[deleteRow];
        try {
-       if (confirm('Do you want to delete this Prospect?')) {
-        let rowId = r.target.parentNode.parentNode.parentNode.parentNode;
-            rowId.parentNode.removeChild(rowId);
-            console.log('rowId');
-            console.log(rowId);
-            //https://7olb5ali48.execute-api.us-east-1.amazonaws.com/admin/consultants
-            //const myRowPost = await axios.post("http://localhost:8081/consultants/remove", this.infoModal)
-            console.log('this.infoModal.client_id');
-            console.log(this.infoModal.client_id);
-            
-            // Added delete new global method
-            var entityType = 'prospects';
-            crudGlobal.deleteEntity(entityType, entityId, index, rowHtml); // remove last 2 parameters ?
-            // const myRowDelete = await axios.delete(
-            // `https://dad59dxvm7.execute-api.us-east-1.amazonaws.com/admin/prospects/${this.infoModal.prospect_id}`)
-            // //'http://localhost:8081/consultants/:id', this.infoModal)
+       if (confirm('Do you want to delete this Prospect?')) { 
+          const deleteRow = r.target.parentNode.parentNode.parentNode.parentNode.getAttribute("id");
+          this.infoModal = this.info[deleteRow];
+
+          let htmlFromSelectedRow = r.target.parentNode.parentNode.parentNode.parentNode;
+          htmlFromSelectedRow.parentNode.removeChild(htmlFromSelectedRow);
+
+          var entityType  = 'prospects';
+          var entityId = this.infoModal.prospect_id;
+          crudGlobal.deleteEntity(entityType, entityId);
+
          } else {
             return 0;
          }
@@ -1140,58 +1134,23 @@ export default {
    //https://7olb5ali48.execute-api.us-east-1.amazonaws.com/admin/vc-upload
     async handleSubmit () {
       let formValues = [];
-          const inputs = document.querySelectorAll(".edit-modal input, select");
-          for (let input of inputs) {
-               let name = input.name;
-               let value = input.value;
-            formValues.push({ [name]: value });
-          }
-          formValues = Object.assign({}, ...formValues);
-          this.data = formValues;
-          console.log(formValues)
-         
-         //admin user 
-
-         // attach current admin user to form 
-          await Auth.currentUserInfo()
-          .then(info => {
-            var userEmail = info.attributes.email;
-            var userName = info.username;
-            console.log('12');
-            //console.log(userEmail);
-            console.log(userName);  
-            this.data.lastEditedBy = userName;
-            formValues.lastEditedBy = this.data.lastEditedBy;
-            //add edit timestamp
-            var timestamp = Number(new Date());
-            const date = new Date(timestamp).toDateString();
-            this.data.timeStampEdit = date;
-         });
-      
-         var string = "";
-         if (formValues.companyName == "") {
-           alert('Company Name is REQUIRED! Please fix.');
-           string ="string";
-           console.log('STRING 1')
-         } 
-
-       //with no image
-      if (string !== "string" && this.employeePic == undefined){
-        console.log('HERE-------');
-         let wNoImageEdit = await axios
-     
-            //https://dad59dxvm7.execute-api.us-east-1.amazonaws.com/admin/prospects/${this.data.prospect_id}
-            //http://localhost:8081/prospects/${this.data.prospect_id}
-            .put(`https://dad59dxvm7.execute-api.us-east-1.amazonaws.com/admin/prospects/${this.data.prospect_id}`, formValues)
-            .then(response => {
-              console.log(response);
-            })
-            .catch(error => {
-              console.log(error);
-            });
-          this.modal = false;
-          this.refreshOnExit += 1;
+      const inputs = document.querySelectorAll(".edit-modal input, select");
+      for (let input of inputs) {
+            let name = input.name;
+            let value = input.value;
+        formValues.push({ [name]: value });
       }
+      formValues = Object.assign({}, ...formValues);
+
+      var entityType  = 'prospects';
+      var entityId = this.infoModal.prospect_id;
+      this.data = formValues;
+
+      crudGlobal.updateEntity(entityType, entityId, formValues);  
+
+      this.modal = false;
+      this.refreshOnExit += 1;
+     
     },
     statusButtons(s) {
       let statusButton = s.target.parentNode;
